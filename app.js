@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
-const port = 3021;
+const port = 3022;
 
 // Configurar el motor de plantillas EJS
 app.set('view engine', 'ejs');

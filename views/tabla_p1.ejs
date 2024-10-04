@@ -3,6 +3,16 @@
 <html>
 <head>
     <title>Tabla Generada</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+        td {
+            width: 20px;
+            height: 20px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
     <h1>Tabla Generada</h1>
@@ -10,10 +20,17 @@
         <% for (let i = 0; i < alto; i++) { %>
             <tr>
                 <% for (let j = 0; j < ancho; j++) { %>
-                    <td style="background-color: <%= getColor(i, j, alto, ancho) %>;">&nbsp;&nbsp;&nbsp;</td>
+                    <td style="background-color: <%= getColor(i, j, alto, ancho) %>;" onclick="showColor(this)">&nbsp;</td>
                 <% } %>
             </tr>
         <% } %>
     </table>
+
+    <script>
+        function showColor(cell) {
+            const color = cell.style.backgroundColor;
+            alert(`Color seleccionado: ${color}`);
+        }
+    </script>
 </body>
 </html>

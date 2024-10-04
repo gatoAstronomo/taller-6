@@ -1,29 +1,34 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const app = express();
-const ejs = require('ejs');
+const port = 3021;
 
+// Configurar el motor de plantillas EJS
+app.set('view engine', 'ejs');
+
+// Middleware para manejar datos de formularios
+app.use(bodyParser.urlencoded({ extended: true }));
+
+// Función para obtener el color basado en las coordenadas
 function getColor(m, n) {
     const colors = ["red", "blue", "green", "yellow"];
     const colorIndex = (m + n) % colors.length;
-    return color[colorIndex];
+    return colors[colorIndex];
 }
 
-app.set('view engine', 'ejs');
-
+// Ruta para mostrar el formulario
 app.get('/', (req, res) => {
-    const m = 4;
-    const n = 10;
-
-    res.render('tabla_p1', { getColor,m , n });
-})
+    res.render('formulario');
+});
 
 // Ruta para procesar el formulario y generar la tabla
 app.post('/generar-tabla', (req, res) => {
     const ancho = parseInt(req.body.ancho);
     const alto = parseInt(req.body.alto);
-    res.render('tabla_p1', { ancho, alto });
+    res.render('tabla_p1', { ancho, alto, getColor });
 });
 
-app.listen(3021, () => {
-    console.log('Servidor ejecucion en puerto 3021');
+// Iniciar el servidor
+app.listen(port, () => {
+    console.log(`Servidor ejecucion en puerto ${port}`);
 });
